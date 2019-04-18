@@ -11,3 +11,12 @@
 - name: update apt repository
   apt:
     update_cache: yes
+- name: Install packages.
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
