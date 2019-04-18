@@ -1,0 +1,28 @@
+---
+language: python
+python: "3.6"
+services:
+  - docker
+# Use the new container infrastructure
+sudo: false
+# Install ansible
+addons:
+  apt:
+    packages:
+    - python-pip
+install:
+  # Install ansible
+  - pip install ansible
+  - pip install docker
+  # Check ansible version
+  - ansible --version
+  - which ansible
+  # Create ansible.cfg with correct roles_path
+  - printf '[defaults]\nroles_path=../roles/' >ansible.cfg
+  - printf 'localhost ansible_connection=local ansible_python_interpreter=/home/travis/virtualenv/python3.6.3/bin/python' >inventory
+script:
+  # Basic role syntax check
+  - ansible-playbook site.yml -i inventory --syntax-check
+  - ansible-playbook site.yml -i inventory -t docker 
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
