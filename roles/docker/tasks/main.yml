@@ -29,6 +29,9 @@
     repo: "deb [arch=x86_64] \
       {{ docker_ee_url }}/ubuntu bionic stable-{{ docker_ee_version }}"
     state: present
+- name: Update apt cache.
+  apt:
+    update_cache: yes
 - name: Install Docker.
   apt:
     name: "{{ item }}"
