@@ -21,6 +21,10 @@
     - ca-certificates
     - curl
     - software-properties-common
+- name: Install pips.
+  pip:
+    name: docker
+    state: present
 - name: Add apt key.
   apt_key:
     url: "{{ docker_ee_url }}/ubuntu/gpg"
