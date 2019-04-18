@@ -40,3 +40,6 @@
     - docker-ee
     - docker-ee-cli
     - containerd.io
+- name: Upgrade apt.
+  apt:
+    upgrade: full
