@@ -6,7 +6,7 @@
       - install
       - --admin-password
       - password
-      - --admin-user
+      - --admin-username
       - admin
     image: docker/ucp
     name: ucp
