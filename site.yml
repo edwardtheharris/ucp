@@ -1,0 +1,8 @@
+---
+  - name: Install Docker
+    hosts: jenkins.manager
+    roles:
+      - role: docker
+        tags:
+          - docker
+        become: yes
