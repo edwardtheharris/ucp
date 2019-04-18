@@ -1,6 +1,6 @@
 ---
   - name: Install Docker
-    hosts: jenkins.manager
+    hosts: worker.swarm
     roles:
       - role: docker
         tags:
