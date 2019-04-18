@@ -1,2 +1,10 @@
 ---
-# tasks file for ucp
+- name: Deploy UCP
+  docker_container:
+    command:
+      - install
+      - --admin-password
+      - password
+      - --admin-user
+      - admin
+    image: docker/ucp
