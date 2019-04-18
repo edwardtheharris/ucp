@@ -16,6 +16,7 @@
     name: "{{ item }}"
     state: present
   loop:
+    - aptitude
     - apt-transport-https
     - ca-certificates
     - curl
