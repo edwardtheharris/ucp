@@ -28,3 +28,4 @@
   apt_repository:
     repo: "deb [arch=x86_64] \
       {{ docker_ee_url }}/ubuntu bionic stable-{{ docker_ee_version }}"
+    state: present
