@@ -1,6 +1,7 @@
 ---
 - name: Deploy UCP
   docker_container:
+    auto_remove: yes
     command:
       - install
       - --admin-password
