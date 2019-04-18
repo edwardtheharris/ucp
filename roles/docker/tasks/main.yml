@@ -29,3 +29,11 @@
     repo: "deb [arch=x86_64] \
       {{ docker_ee_url }}/ubuntu bionic stable-{{ docker_ee_version }}"
     state: present
+- name: Install Docker.
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - docker-ee
+    - docker-ee-cli
+    - containerd.io
