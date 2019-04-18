@@ -6,3 +6,6 @@
         tags:
           - docker
         become: yes
+      - role: ucp
+        tags:
+          - ucp
