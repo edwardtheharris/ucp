@@ -1,2 +1,13 @@
 ---
-# tasks file for docker
+- name: uninstall old versions
+  apt:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - docker
+    - docker-engine
+    - docker-ce
+    - docker.io
+- name: update apt repository
+  apt:
+    update_cache: yes
