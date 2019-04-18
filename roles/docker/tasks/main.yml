@@ -21,6 +21,7 @@
     - ca-certificates
     - curl
     - software-properties-common
+    - python3-pip
 - name: Install pips.
   pip:
     name: docker
