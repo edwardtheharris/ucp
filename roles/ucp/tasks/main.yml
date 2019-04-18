@@ -9,5 +9,6 @@
       - --admin-user
       - admin
     image: docker/ucp
+    name: ucp
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
