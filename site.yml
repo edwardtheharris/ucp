@@ -1,6 +1,6 @@
 ---
   - name: Install Docker
-    hosts: worker.swarm
+    hosts: gcp
     roles:
       - role: docker
         tags:
