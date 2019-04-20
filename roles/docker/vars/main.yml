@@ -2,3 +2,12 @@
 docker_ee_url: "https://storebits.docker.com\
   /ee/ubuntu/sub-33c98db3-49e2-4693-8f5d-65ca028d9bd7"
 docker_ee_version: 18.09
+install_apt_packages:
+  - aptitude
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - netdata
+  - python3
+  - python3-pip
+  - software-properties-common
