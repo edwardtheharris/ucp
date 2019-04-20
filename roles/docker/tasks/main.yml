@@ -15,13 +15,7 @@
   apt:
     name: "{{ item }}"
     state: present
-  loop:
-    - aptitude
-    - apt-transport-https
-    - ca-certificates
-    - curl
-    - software-properties-common
-    - python3-pip
+  loop: install_apt_packages 
 - name: Install pips.
   pip:
     name: docker
