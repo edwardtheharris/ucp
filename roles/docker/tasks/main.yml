@@ -18,8 +18,11 @@
   loop: "{{ install_apt_packages }}"
 - name: Install pips.
   pip:
-    name: docker
+    name: "{{ item }}"
     state: present
+  loop:
+    - docker
+    - jsondiff
 - name: Add apt key.
   apt_key:
     url: "{{ docker_ee_url }}/ubuntu/gpg"
