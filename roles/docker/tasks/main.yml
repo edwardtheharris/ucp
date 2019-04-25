@@ -20,6 +20,7 @@
   pip:
     name: "{{ item }}"
     state: present
+    executable: pip3
   loop:
     - docker
     - jsondiff
