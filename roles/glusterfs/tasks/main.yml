@@ -1,2 +1,14 @@
 ---
-# tasks file for glusterfs
+- name: Add key for gluster repo to apt.
+  apt_key:
+    url: http://download.gluster.org/pub/gluster/glusterfs/LATEST/rsa.pub
+    state: present
+- name: Add apt repo for gluster.
+  apt_repository:
+    repo: "deb https://download.gluster.org/pub/gluster/glusterfs/LATEST/Debian/18.04/amd64/apt bionic beaver main"
+    state: present
+    update_cache: yes
+- name: Install glusterfs.
+  apt:
+    update_cache: yes
+    name: glusterfs-server
