@@ -20,10 +20,11 @@
   pip:
     name: "{{ item }}"
     state: present
+    executable: pip3
   loop:
     - docker
     - jsondiff
-    - ansible
+    - git+https://github.com/ansible/ansible
 - name: Add apt key.
   apt_key:
     url: "{{ docker_ee_url }}/ubuntu/gpg"
