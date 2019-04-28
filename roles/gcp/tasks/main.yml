@@ -23,9 +23,3 @@
   apt:
     name: gcsfuse
     state: present
-- name: Update user.
-  user:
-    name: "{{ username }}"
-    groups: fuse
-    append: yes
-    state: present
