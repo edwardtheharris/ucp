@@ -1,8 +1,3 @@
-env:
-  global:
-  - secure: q/DNNEi7cREdyU/74HoWfPoealKYWdlJtXEr9lhRpEk54mdZzLOCNNzXpBN05q7dxgEu/DrBVcgf/omUEWnZIn723sZCv0zHtvpWW+A7vDd80Oq10GCPiOZqHfziSUTG8timhBYfY5yd4BwcHNv4fDcgRH+LAc260n0FmKa+0wh9HLYNRTAfpEvG+7eqJQMIedgwoJrf+1uL/t5QFy0S1bv7dul3DomrIdlmGIWr9xJGfn1ZulwOFfQ0BbqjMgbgf93sr0xuJP3Nz9tFGF0IMAN3I/vuKKYzbWdvhsREe3zgZ98IfTGQCSO1IpZz3h+7HEE0prYnniupGcCH4jWonJ3+BGpWZWozcB6FYurbX28AQ00m++R+IoVp6/IsqRUq4rhRK/Krhv+R2mi/UuQqFi2iQ61ITtV2ErrdwR3YOvwXzYXUijiOxhE+hhzpXSRsR8U7+vujj1y5dqEVgcjQgA8Mb2EvjtpcNc/D1Vf6YWMtYrEZ2TgZzVNJxcD4Zo6KOe2CaO/e/AilpGnP4IwvvXbxzpr+KeACbG0MQ9RgqiaK89/wBHLOqI8RPRqWl8aLoWuXwOgE5VAk0PKaPee1L4ZODFuMp/p1mG97ObteV7bRJnKQny0jT58XF46z7RNbidbgifQoz008lbfDXrQV8XnyIhmyt9fWpuy08CLt9XU=
-  - secure: ORf0FrFWhBQx6sUhlaiLzywi+FUe34PqfxJYr9tbemtwgpni9RV7QUwNZ20pOJsx4odgXSGC0v/nsoKlD0du4j0poJL3YK1RZR9Pe45TjMj9ZwQJZfRv5kv1VBTJoVmRW4LuZA7tgoWUbjC9Tp4nOjw6WqOew30O4z2lzWwQMC0lSBdzpwwMXZMnC3TIk28/FJy98vbd54Q99q6fxca57fBoSYs5Qaq6aIFim+EcfrG9Z8q5mApBCdhbmy23ooE8khPJwSPgnk8rM+3Fu8hl9YrPy4gfQUXLNY1YASl8+2dS2GlW88Vw1tvtykHnFEDSNlWn0Y6h64/C+vfzp6W+1zQkkkTnCC5xxTOflgksXbk3hbeFRN/B1bZ6y7IZhp5ydXqfmgkQbcDq9INu/knXjFDLDu3R4wYWrRZZszLTmUIyXyc4bS3R8lqv+Lj2DfAA36IGm20IdbbeCf8YfTO4xl8MWh6cYuN3ei+M3OxZAWuzYEp7+t4w94d879M7r53VsOlV7mM2RFQJ25kqC269oPfdsfxUPLeqTPwW9sTTssBQt1BaIMgci2u8FasI+IcUOvHbIfB4mkEizl5qdsiE5Lt4jbcWRE0KGXkHa0HUKaVJQSsSAVvE6denfCs3ZqoZsNL+Wah6xABrvAh9mfL6fVan5Mw2q6rT7UKt1dqMlmU=
-  - secure: N8Jui4YTG59VlvB/Sal/16HWADUrKfv7GTHymCPTEZINzXA53lSsB7dxzl7vnqBmNLorRXBEmBMyn2/tAEyCeWqyBMmjh+j4jYOhX6/90fEPsEbLgvTqhcbsbvx1ar8EthvPktg1ertcGOvJvbYSIg30gNXzQnO0oCxdbsM0kfPJknmjLeWfGHHWOmW1caW7zD4oBmvfvVHJGaGqVX22wWERdAvqK0HfgttW4Zrj6fN7OeWO4eEjO784g6/SucaOFytQCygGvfrfvrC4FpPFwH/ekjPuHRCIssjgOpzciPUGMofFHki50gqjNTX6Paj/x2gD+RKSL442T6x0yS0x43cWhLF4i6i/ve26FhKmiv6s080gTC1KOttnyV0SU4k8hpp/8i4TsfH1bAMrqoyaKlCsodFr1DK8X5OHZkz0Wp0AUKniD6EUkaDZJiWRD0Mj/5YQKfkBOkR3FuVHy0xPuyPQSb74gf7AqCO3PSug3FDS3xM7i0EPyfQ+Gg1hGa7U2d392ORSWDn73ODQz7SEq1eAtabOBf/Km+LtUWfQvbPl7ZzMfEBmv3UTBbr6IieY3oIaXOY++TwsacsHcB9BMOP5fzKQsrQNuEY4bdJzW1Bx3ehyYAqOIfO+BdrHx1mAWQsfIg8W3i2RT7nRdPkgQYZG9Yp1WrzhLceH+qbywmA=
 language: python
 python: '3.6'
 services:
@@ -13,18 +8,14 @@ addons:
     packages:
     - python-pip
 install:
-- pip install ansible
+- pip install git+https://github.com/ansible/ansible
 - pip install docker
 - ansible --version
 - which ansible
-- printf '[defaults]\nroles_path=../roles/' >ansible.cfg
-- printf 'localhost ansible_connection=local ansible_python_interpreter=/home/travis/virtualenv/python3.6.3/bin/python'
-  >inventory
+- sudo mkdir -pv /etc/ansible/hosts
+- sudo cp .inventory /etc/ansible/hosts/hosts
 script:
 - ansible-playbook site.yml -i inventory --syntax-check
 - ansible-playbook site.yml -i inventory -t docker
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
-before_install:
-- openssl aes-256-cbc -K $encrypted_815ce45f88f5_key -iv $encrypted_815ce45f88f5_iv
-  -in .ucp.enc -out .ucp -d
