@@ -3,3 +3,8 @@
   apt_repository:
     repo: 'deb http://packages.cloud.google.com/apt gcsfuse-bionic main'
     state: present
+    update_cache: yes
+- name: Add gpg key for repo.
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
