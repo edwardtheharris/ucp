@@ -1,10 +1,14 @@
 ---
   - name: Install Docker
-    hosts: ucp.brick-house.org
+    hosts: gcp
     roles:
       - role: docker
         tags:
           - docker
+        become: yes
+      - role: gcp
+        tags:
+          - gcp
         become: yes
       - role: ucp
         tags:
