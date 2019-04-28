@@ -1,0 +1,5 @@
+---
+- name: Add gcs fuse repo.
+  apt_repository:
+    repo: 'deb http://packages.cloud.google.com/apt gcsfuse-bionic main'
+    state: present
