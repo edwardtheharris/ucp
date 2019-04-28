@@ -16,6 +16,8 @@
     name: "{{ item }}"
     state: present
   loop: "{{ install_apt_packages }}"
+  tags:
+    - apt_install
 - name: Install pips.
   pip:
     name: "{{ item }}"
