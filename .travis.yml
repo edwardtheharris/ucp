@@ -8,12 +8,13 @@ addons:
     packages:
     - python-pip
 install:
-- pip install git+https://github.com/ansible/ansible
-- pip install docker
-- ansible --version
-- which ansible
-- sudo mkdir -pv /etc/ansible/hosts
-- sudo cp .inventory /etc/ansible/hosts/hosts
+  - pip install git+https://github.com/ansible/ansible
+  - pip install docker
+  - ansible --version
+  - which ansible
+  - sudo mkdir -pv /etc/ansible/hosts /etc/ansible/vault
+  - sudo cp .inventory /etc/ansible/hosts/hosts
+  - sudo cp .ucp /etc/ansible/vault/ucp
 script:
 - ansible-playbook site.yml -i inventory --syntax-check
 - ansible-playbook site.yml -i inventory -t docker
