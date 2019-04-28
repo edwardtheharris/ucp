@@ -13,6 +13,7 @@
     - role: glusterfs
       tags:
         - glusterfs
+      become: yes
 - name: Install UCP.
   hosts: gcp_role_manager
   roles:
