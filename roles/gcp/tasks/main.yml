@@ -8,3 +8,17 @@
   apt_key:
     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
     state: present
+- name: Update cache, upgrade packages.
+  apt:
+    update_cache: yes
+    upgrade: full
+- name: Install FUSE
+  apt:
+    name: gcsfuse
+    state: present
+- name: Update user.
+  user:
+    name: "{{ username }}"
+    groups: fuse
+    append: yes
+    state: present
