@@ -1,3 +1,7 @@
+before_install:
+  - "openssl aes-256-cbc -K $encrypted_815ce45f88f5_key \
+    -iv $encrypted_815ce45f88f5_iv \
+    -in .ucp.enc -out .ucp -d"
 language: python
 python: '3.6'
 services:
@@ -8,13 +12,13 @@ addons:
     packages:
     - python-pip
 install:
-  - pip install git+https://github.com/ansible/ansible
-  - pip install docker
-  - ansible --version
-  - which ansible
-  - sudo mkdir -pv /etc/ansible/hosts /etc/ansible/vault
-  - sudo cp .inventory /etc/ansible/hosts/hosts
-  - sudo cp .ucp /etc/ansible/vault/ucp
+- pip install git+https://github.com/ansible/ansible
+- pip install docker
+- ansible --version
+- which ansible
+- sudo mkdir -pv /etc/ansible/hosts /etc/ansible/vault
+- sudo cp .inventory /etc/ansible/hosts/hosts
+- sudo cp .ucp /etc/ansible/vault/ucp
 script:
 - ansible-playbook site.yml -i inventory --syntax-check
 - ansible-playbook site.yml -i inventory -t docker
