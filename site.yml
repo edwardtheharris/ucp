@@ -6,6 +6,10 @@
         tags:
           - docker
         become: yes
+      - role: gcp
+        tags:
+          - gcp
+        become: yes
       - role: ucp
         tags:
           - ucp
