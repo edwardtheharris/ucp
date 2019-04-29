@@ -17,6 +17,6 @@
 - name: Install UCP.
   hosts: gcp_role_manager
   roles:
-      - role: ucp
-        tags:
-          - ucp
+    - role: ucp
+      tags:
+        - ucp
