@@ -1,13 +1,4 @@
 ---
-- name: Add correct repo for glusterfs.
-  apt_repository:
-    repo: ppa:gluster/glusterfs-6
-    state: present
-    update_cache: yes
-- name: Install glusterfs.
-  apt:
-    update_cache: yes
-    name: glusterfs-server
 - name: Install ntpd.
   apt:
     name: ntp
