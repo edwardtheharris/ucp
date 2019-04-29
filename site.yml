@@ -6,9 +6,9 @@
       tags:
         - docker
       become: yes
-    - role: gcp
+    - role: filesystem
       tags:
-        - gcp
+        - filesystem
       become: yes
     - role: glusterfs
       tags:
