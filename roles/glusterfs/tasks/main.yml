@@ -17,3 +17,14 @@
     name: glusterd
     state: started
     enabled: yes
+- name: Create the partition.
+  parted:
+    device: /dev/sdb
+    label: gpt
+    name: gluster
+    number: 1
+    state: present
+- name: Format the fs for bricks.
+  filesystem:
+    dev: /dev/sdb1
+    fstype: xfs
