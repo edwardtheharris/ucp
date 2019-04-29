@@ -45,7 +45,22 @@
       - 10.138.0.2
 - name: Create brick directory.
   file:
-    path: /mnt/bricks/brick1/money
+    path: /mnt/bricks/brick1/money1
     state: directory
   tags:
     - bricks
+- name: create gluster volume
+  gluster_volume:
+    state: present
+    name: money
+    bricks: /bricks/brick1/money1
+    rebalance: yes
+    cluster:
+      - 10.168.0.3
+      - 10.168.0.4
+      - 10.138.0.2
+  run_once: true
+- name: start gluster volume
+  gluster_volume:
+    state: started
+    name: test1
