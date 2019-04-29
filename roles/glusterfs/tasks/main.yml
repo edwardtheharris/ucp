@@ -1,7 +1,7 @@
 ---
 - name: Add coorect repo for glusterfs.
   apt_repository:
-    repo: ppa:gluster/glusterfs-3.8
+    repo: ppa:gluster/glusterfs-6.1
     state: present
     update_cache: yes
 - name: Install glusterfs.
