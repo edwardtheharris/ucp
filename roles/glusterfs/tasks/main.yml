@@ -40,9 +40,9 @@
   gluster_peer:
     state: present
     nodes:
-      - 10.168.0.3
-      - 10.168.0.4
-      - 10.138.0.2
+      - manager
+      - worker1
+      - worker2
 - name: Create brick directory.
   file:
     path: /mnt/bricks/brick1/money1
@@ -53,12 +53,12 @@
   gluster_volume:
     state: present
     name: money
-    bricks: /mnt/bricks/brick1/money1
+    brick: /mnt
     rebalance: yes
     cluster:
-      - 10.168.0.3
-      - 10.168.0.4
-      - 10.138.0.2
+      - manager
+      - worker1
+      - worker2
   run_once: true
   tags:
     - volumes
