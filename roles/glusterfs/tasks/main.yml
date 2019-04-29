@@ -42,3 +42,11 @@
     name: money
   tags:
     - volumes
+- name: Mount the glusterfs volume.
+  mount:
+    path: /srv/money
+    src: worker1:/money
+    state: mounted
+    fstype: glusterfs
+    backup: yes
+  become: yes
