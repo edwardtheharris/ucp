@@ -19,7 +19,7 @@
     - pool
 - name: Create brick directory.
   file:
-    path: /mnt/bricks/brick1/money1
+    path: /mnt/bricks
     state: directory
   tags:
     - bricks
@@ -27,7 +27,7 @@
   gluster_volume:
     state: present
     name: money
-    brick: /mnt
+    brick: /mnt/bricks
     rebalance: yes
     cluster:
       - manager
