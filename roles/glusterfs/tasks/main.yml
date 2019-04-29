@@ -1,17 +1,8 @@
 ---
-- name: Add key for gluster repo to apt.
-  apt_key:
-    url: http://download.gluster.org/pub/gluster/glusterfs/LATEST/rsa.pub
-    state: present
 - name: Add coorect repo for glusterfs.
   apt_repository:
     repo: ppa:gluster/glusterfs-3.8
     state: present
-    update_cache: yes
-- name: Add apt repo for gluster.
-  apt_repository:
-    repo: "deb https://download.gluster.org/pub/gluster/glusterfs/LATEST/Debian/18.04/amd64/apt bionic beaver main"
-    state: absent
     update_cache: yes
 - name: Install glusterfs.
   apt:
