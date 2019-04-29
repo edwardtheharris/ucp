@@ -36,3 +36,10 @@
     fstype: xfs
     backup: yes
   become: yes
+- name: Create a trusted storage pool
+  gluster_peer:
+    state: present
+    nodes:
+      - 10.168.0.3
+      - 10.168.0.4
+      - 10.138.0.2
