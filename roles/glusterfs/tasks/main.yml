@@ -8,6 +8,10 @@
   apt:
     update_cache: yes
     name: glusterfs-server
+- name: Install ntpd.
+  apt:
+    name: ntp
+    state: present
 - name: Start and enable service.
   service:
     name: glusterd
