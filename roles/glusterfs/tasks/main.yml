@@ -35,5 +35,4 @@
     state: mounted
     fstype: xfs
     backup: yes
-    opts: rw,allow_other,uid=1001,gid=999
   become: yes
