@@ -1,5 +1,5 @@
 ---
-- name: Add coorect repo for glusterfs.
+- name: Add corect repo for glusterfs.
   apt_repository:
     repo: ppa:gluster/glusterfs-6
     state: present
