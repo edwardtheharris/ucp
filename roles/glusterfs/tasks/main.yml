@@ -28,3 +28,12 @@
   filesystem:
     dev: /dev/sdb1
     fstype: xfs
+- name: Mount the filesystem
+  mount:
+    path: /mnt
+    src: /dev/sdb1
+    state: mounted
+    fstype: xfs
+    backup: yes
+    opts: rw,allow_other,uid=1001,gid=999
+  become: yes
