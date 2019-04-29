@@ -53,7 +53,7 @@
   gluster_volume:
     state: present
     name: money
-    bricks: /bricks/brick1/money1
+    bricks: /mnt/bricks/brick1/money1
     rebalance: yes
     cluster:
       - 10.168.0.3
