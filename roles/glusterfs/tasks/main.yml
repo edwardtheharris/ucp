@@ -44,6 +44,8 @@
       - 10.168.0.4
       - 10.138.0.2
 - name: Create brick directory.
-  shell: "mkdir -pv /mnt/bricks/brick1/money1"
+  file:
+    path: /mnt/bricks/brick1/money
+    state: directory
   tags:
     - bricks
