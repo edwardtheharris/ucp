@@ -50,3 +50,15 @@
     fstype: glusterfs
     backup: yes
   become: yes
+  tags:
+    - mount_gluster
+- name: Mount the glusterfs volume.
+  mount:
+    path: /srv/money
+    src: worker1:/money
+    state: unmounted
+    fstype: glusterfs
+    backup: yes
+  become: yes
+  tags:
+    - unmount_gluster
