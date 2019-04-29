@@ -1,10 +1,15 @@
 ---
 - name: Add coorect repo for glusterfs.
   apt_repository:
-    repo: ppa:gluster/glusterfs-6.1
+    repo: ppa:gluster/glusterfs-6
     state: present
     update_cache: yes
 - name: Install glusterfs.
   apt:
     update_cache: yes
     name: glusterfs-server
+- name: Start and enable service.
+  service:
+    name: glusterd
+    state: started
+    enabled: yes
