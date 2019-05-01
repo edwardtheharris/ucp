@@ -3,11 +3,6 @@
   apt:
     name: ntp
     state: present
-- name: Start and enable service.
-  service:
-    name: glusterd
-    state: started
-    enabled: yes
 - name: Create the partition.
   parted:
     device: /dev/sdb
@@ -19,9 +14,13 @@
   filesystem:
     dev: /dev/sdb1
     fstype: xfs
+- name: Create the data directory.
+  file:
+    dest: /data/glusterfs/money/bricks
+    state: directory
 - name: Mount the filesystem
   mount:
-    path: /mnt
+    path: /data/glusterfs/money/bricks
     src: /dev/sdb1
     state: mounted
     fstype: xfs
