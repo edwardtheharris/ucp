@@ -1,15 +1,22 @@
 ---
-  - name: Install Docker
-    hosts: gcp_swarm_brick_house
-    roles:
-      - role: docker
-        tags:
-          - docker
-        become: yes
-      - role: gcp
-        tags:
-          - gcp
-        become: yes
-      - role: ucp
-        tags:
-          - ucp
+- name: Install Docker
+  hosts: gcp_swarm_brick_house
+  roles:
+    - role: docker
+      tags:
+        - docker
+      become: yes
+    - role: filesystem
+      tags:
+        - filesystem
+      become: yes
+    - role: glusterfs
+      tags:
+        - glusterfs
+      become: yes
+- name: Install UCP.
+  hosts: gcp_role_manager
+  roles:
+    - role: ucp
+      tags:
+        - ucp
