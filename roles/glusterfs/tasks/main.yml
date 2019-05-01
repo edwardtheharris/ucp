@@ -30,19 +30,19 @@
   gluster_volume:
     state: present
     name: money
-    bricks: '/data/glusterfs/money/bricks/brick'
-    rebalance: yes
+    bricks: /data/glusterfs/money/bricks/brick
     cluster:
       - manager
       - worker1
       - worker2
     replicas: 3
-    start_on_create: yes
-    options: {
-      performance.cache-size: 256MB,
-      quick-read: 'on'
-    }
   run_once: true
+  tags:
+    - volumes
+- name: Start the glusterfs volume.
+  gluster_volume:
+    name: money
+    state: started
   tags:
     - volumes
 - name: Mount the glusterfs volume.
@@ -55,6 +55,14 @@
   become: yes
   tags:
     - mount_gluster
+- name: Update ownership for mount.
+  file:
+    dest: /mnt/money
+    state: directory
+    owner: duchess
+    group: docker
+  tags:
+    - update_owner
 # - name: Mount the glusterfs volume.
 #   mount:
 #     path: /srv/money
