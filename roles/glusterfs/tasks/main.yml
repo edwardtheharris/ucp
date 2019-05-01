@@ -12,7 +12,7 @@
   service:
     name: glusterd
     state: started
-    enabled: yes    
+    enabled: yes
 - name: Create a trusted storage pool
   gluster_peer:
     state: present
@@ -22,41 +22,39 @@
       - worker2
   tags:
     - pool
-- name: Creat mount point.
+- name: Create mount point.
   file:
-    path: /data/glusterfs/money/bricks/
+    dest: /data/glusterfs/money/bricks/brick
     state: directory
-  tags:
-    - bricks
-- name: create gluster volume
+- name: Create glusterfs volume
   gluster_volume:
     state: present
     name: money
-    brick: /mnt/bricks
+    bricks: '/data/glusterfs/money/bricks/brick'
     rebalance: yes
     cluster:
       - manager
       - worker1
       - worker2
+    replicas: 3
+    start_on_create: yes
+    options: {
+      performance.cache-size: 256MB,
+      quick-read: 'on'
+    }
   run_once: true
   tags:
     - volumes
-- name: start gluster volume
-  gluster_volume:
-    state: started
-    name: money
+- name: Mount the glusterfs volume.
+  mount:
+    path: /mnt/money
+    src: 'worker1:/money'
+    state: mounted
+    fstype: glusterfs
+    backup: yes
+  become: yes
   tags:
-    - volumes
-# - name: Mount the glusterfs volume.
-#   mount:
-#     path: /srv/money
-#     src: worker1:/money
-#     state: mounted
-#     fstype: glusterfs
-#     backup: yes
-#   become: yes
-#   tags:
-#     - mount_gluster
+    - mount_gluster
 # - name: Mount the glusterfs volume.
 #   mount:
 #     path: /srv/money
