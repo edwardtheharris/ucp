@@ -1,0 +1,75 @@
+---
+- name: Add correct repo for glusterfs.
+  apt_repository:
+    repo: ppa:gluster/glusterfs-6
+    state: present
+    update_cache: yes
+- name: Install glusterfs.
+  apt:
+    update_cache: yes
+    name: glusterfs-server
+- name: Start and enable service.
+  service:
+    name: glusterd
+    state: started
+    enabled: yes
+- name: Create a trusted storage pool
+  gluster_peer:
+    state: present
+    nodes:
+      - manager
+      - worker1
+      - worker2
+  tags:
+    - pool
+- name: Create mount point.
+  file:
+    dest: "/data/glusterfs/{{ item }}/bricks/brick"
+    state: directory
+- name: Create glusterfs volume
+  gluster_volume:
+    state: present
+    name: money
+    bricks: "/data/glusterfs/{{ item }}/bricks/brick"
+    cluster:
+      - manager
+      - worker1
+      - worker2
+    replicas: 3
+  run_once: true
+  tags:
+    - volumes
+- name: Start the glusterfs volume.
+  gluster_volume:
+    name: money
+    state: started
+  tags:
+    - volumes
+- name: Mount the glusterfs volume.
+  mount:
+    path: /mnt/money
+    src: 'worker1:/money'
+    state: mounted
+    fstype: glusterfs
+    backup: yes
+  become: yes
+  tags:
+    - mount_gluster
+- name: Update ownership for mount.
+  file:
+    dest: /mnt/money
+    state: directory
+    owner: duchess
+    group: docker
+  tags:
+    - update_owner
+# - name: Mount the glusterfs volume.
+#   mount:
+#     path: /srv/money
+#     src: worker1:/money
+#     state: unmounted
+#     fstype: glusterfs
+#     backup: yes
+#   become: yes
+#   tags:
+#     - unmount_gluster
