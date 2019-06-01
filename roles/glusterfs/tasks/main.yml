@@ -24,13 +24,13 @@
     - pool
 - name: Create mount point.
   file:
-    dest: /data/glusterfs/money/bricks/brick
+    dest: "/data/glusterfs/{{ item }}/bricks/brick"
     state: directory
 - name: Create glusterfs volume
   gluster_volume:
     state: present
     name: money
-    bricks: /data/glusterfs/money/bricks/brick
+    bricks: "/data/glusterfs/{{ item }}/bricks/brick"
     cluster:
       - manager
       - worker1
